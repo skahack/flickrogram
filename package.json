@@ -1,0 +1,40 @@
+{
+  "name": "flickrogram",
+  "version": "0.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "DEBUG=* node server.js",
+    "build": "browserify client/app.js > public/js/bundle.js",
+    "build-css": "duo styles/index.css | autoprefixer > public/css/bundle.css"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.9.2",
+    "debug": "^2.1.0",
+    "express": "^4.10.2",
+    "flickrapi": "^0.3.28",
+    "flux": "^2.0.1",
+    "jade": "^1.7.0",
+    "object-assign": "^1.0.0",
+    "page": "^1.4.1",
+    "react": "^0.12.0",
+    "superagent": "^0.21.0",
+    "underscore": "^1.7.0"
+  },
+  "devDependencies": {
+    "autoprefixer": "^4.0.0",
+    "browserify": "^6.3.2",
+    "duo": "^0.8.10",
+    "envify": "^3.2.0",
+    "reactify": "^0.16.0"
+  },
+  "browserify": {
+    "transform": [
+      "reactify",
+      "envify"
+    ]
+  }
+}
