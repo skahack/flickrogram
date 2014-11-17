@@ -20,7 +20,7 @@ app.param('user', function(req, res, next, user){
   }
 });
 app.get('/', Routes.index);
-app.get('/:user', Routes.index);
+app.get('/:user', Routes.user);
 
 app.get('/api/users/:user', Routes.userInfo);
 app.get('/api/users/:user/photos', Routes.userPhotos);

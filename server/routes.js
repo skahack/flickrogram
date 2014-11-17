@@ -1,4 +1,9 @@
+require('node-jsx').install();
 var debug = require('debug')('flickrogram:routes');
+var async = require('async');
+var React = require('react');
+var clientApp = require('../client/components/app');
+var clientAPI = require('../client/utils/api');
 var Flickr = require('flickrapi');
 var flickrKey = {
   api_key: '98055d6edc144da1d60ef7152836f894'
@@ -41,7 +46,24 @@ function go404(err, res) {
 
 var Routes = {
   index: function(req, res){
-    res.render('index.jade');
+    res.render('index.jade', { body: '' });
+  },
+
+  user: function(req, res){
+    var username = req.params.user;
+
+    async.parallel([
+      function(next){
+        clientAPI.user.getPhotos(username, next);
+      },
+      function(next){
+        clientAPI.user.getInfo(username, next);
+      }
+    ],
+    function(err, result){
+      var html = React.renderToString(React.createElement(clientApp));
+      res.render('index.jade', { body: html });
+    });
   },
 
   userInfo: function(req, res){
