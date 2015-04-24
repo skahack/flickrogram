@@ -1,6 +1,6 @@
 var page = require('page');
 var React = require('react');
-var App = require('./components/app');
+var App = require('./components/app.jsx');
 var API = require('./utils/api');
 
 var Home = React.createClass({
@@ -27,7 +27,7 @@ var Home = React.createClass({
   }
 });
 
-page('/', function(ctx){
+page('/', function(){
   React.render(
     <Home />,
     document.getElementById('root')

@@ -1,8 +1,7 @@
-require('node-jsx').install();
+require('node-jsx').install({extension: '.jsx'});
 var debug = require('debug')('flickrogram:routes');
-var async = require('async');
 var React = require('react');
-var clientApp = require('../client/components/app');
+var clientApp = require('../client/components/app.jsx');
 var clientAPI = require('../client/utils/api');
 var Flickr = require('flickrapi');
 var flickrKey = {
@@ -51,19 +50,25 @@ var Routes = {
 
   user: function(req, res){
     var username = req.params.user;
-
-    async.parallel([
-      function(next){
-        clientAPI.user.getPhotos(username, next);
-      },
-      function(next){
-        clientAPI.user.getInfo(username, next);
-      }
-    ],
-    function(err, result){
-      var html = React.renderToString(React.createElement(clientApp));
+    clientAPI.user.getPhotos(username, function(){
+      var elm = React.createElement(clientApp);
+      var html = React.renderToString(elm);
       res.render('index.jade', { body: html });
+      // res.send('Hello');
     });
+
+    //async.parallel([
+    //  function(next){
+    //    clientAPI.user.getPhotos(username, next);
+    //  },
+    //  function(next){
+    //    clientAPI.user.getInfo(username, next);
+    //  }
+    //],
+    //function(err, result){
+    //  var html = React.renderToString(React.createElement(clientApp));
+    //  res.render('index.jade', { body: html });
+    //});
   },
 
   userInfo: function(req, res){

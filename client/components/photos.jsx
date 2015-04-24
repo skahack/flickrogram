@@ -1,5 +1,6 @@
 var React = require('react');
-var Photo = require('./photo');
+var Photo = require('./photo.jsx');
+var Grid = require('./elements/grid.jsx');
 
 var Photos = React.createClass({
   render: function(){
@@ -12,7 +13,11 @@ var Photos = React.createClass({
     }
 
     return (
-      <ul className="l-grid photo-grid">{photos}</ul>
+      <Grid style={{
+        boxShadow: '0 1px 1px rgba(0,0,0,.24),0 1px 5px rgba(0,0,0,.05)'
+      }}>
+        {photos}
+      </Grid>
     );
   }
 });

@@ -1,8 +1,8 @@
 var React = require('react');
 var UserStore = require('../stores/user');
 var PhotoStore = require('../stores/photo');
-var FeedHeader = require('./feed-header');
-var MainSection = require('./main-section');
+var FeedHeader = require('./feed-header.jsx');
+var MainSection = require('./main-section.jsx');
 
 function getState() {
   return {
